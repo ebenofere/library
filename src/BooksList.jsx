@@ -1,8 +1,9 @@
+import { useState } from 'react';
 import './BooksList.css'
 import BooksListItem from './BooksListItem';
 
 
-const books = [
+const initialBooks = [
   {
     id: 1,
     title: "To Kill a Mockingbird",
@@ -77,6 +78,19 @@ const books = [
 
 
 function BooksList() {
+  const [books, setBooks] = useState(initialBooks);
+
+  function handleRate(id, rating) {
+    setBooks((prevState) => {
+      return prevState.map((book) => {
+        if (book.id === id) {
+          book.rating = rating;
+        }
+        return book;
+      })
+    })
+  }
+
   if (books.length === 0) {
     return <div>No books found.</div>
   } else {
@@ -93,7 +107,7 @@ function BooksList() {
         <tbody>
           {
             books.map((book) => (
-                <BooksListItem key={book.id} book={book} />
+                <BooksListItem key={book.id} book={book} onRate={handleRate} />
             ))
           }
         </tbody>
