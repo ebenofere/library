@@ -101,7 +101,6 @@ function BooksList() {
               <th>Author</th>
               <th>ISBN</th>
               <th>Rating</th>
-              <th>Rating</th>
           </tr>
         </thead>
         <tbody>
