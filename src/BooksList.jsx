@@ -81,14 +81,21 @@ const initialBooks = [
 function BooksList() {
   const [books, setBooks] = useState(initialBooks);
 
+  // Function to handle updating the rating of a book in the state.
+
   function handleRate(id, rating) {
+    // Update the state of books using the setBooks function with the previous state.
     setBooks((prevState) => {
-      return produce(prevState, (draftState) => {
-        const index = draftState.findIndex((book) => book.id === id);
-        draftState[index].rating = rating;
-      })
+        // Use the produce function to create an immutable update on the draft state.
+        return produce(prevState, (draftState) => {
+            // Find the index of the book with the specified ID in the draft state.
+            const index = draftState.findIndex((book) => book.id === id);
+            // Update the rating of the book at the found index in the draft state.
+            draftState[index].rating = rating;
+        })
     })
   }
+
 
   if (books.length === 0) {
     return <div>No books found.</div>
